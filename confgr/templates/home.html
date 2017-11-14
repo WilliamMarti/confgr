@@ -1,0 +1,169 @@
+
+
+{% extends "layout.html" %}
+
+{% block body %}
+
+	<body>
+		
+		<div class="container">
+
+		  <div class="row"> 
+
+		    <div class="col-md-6"> <!-- Left  Column -->
+
+		    	<div class="row">
+
+		    		<div class="col-md-12">
+
+		    			<div class="card">
+
+						  <div class="card-header card-style">
+						    Devices Selected
+						  </div>
+
+						  <div id="selecteddevices" class="card-block">
+
+
+						  </div> <!-- Card Block -->
+
+						</div> <!-- Card -->
+
+		    		</div>
+
+		    	</div> <!-- Row -->
+
+		    	<div class="row">
+
+		    		<div class="col-md-12">
+
+		    			<div class="card">
+
+						  <div class="card-header card-style">
+						    Commands to Run
+						  </div>
+
+
+
+						  <div class="card-block">
+
+						  	<p> One time username and password </p>
+
+						  	<div class="row">
+
+						  		<div class="col-md-6">
+
+						  		</div>
+
+						  		<div class="col-md-6">
+
+						  		</div>
+
+						  	</div>
+
+							 <div class="form-group">
+							  <label for="username">Username:</label>
+							  <input type="text" class="form-control" id="username">
+							</div>
+							<div class="form-group">
+							  <label for="password">Password:</label>
+							  <input type="password" class="form-control" id="password">
+							</div>
+
+							<div class="form-group">
+							  <label for="commands">Commands:</label>
+							  <textarea class="form-control" rows="5" id="commands"></textarea>
+							</div>
+
+
+
+						  </div> <!-- Card Block -->
+
+							<div class="card-footer text-muted">
+
+								<button class="btn btn-primary">Run</button>
+
+							</div>
+
+						</div> <!-- Card -->
+
+
+		    		</div>
+
+
+		    	</div> <!-- Row -->
+
+
+
+		    </div>
+
+		    <div class="col-md-6"> <!-- Right  Column -->
+
+
+
+		    	<div class="card">
+				  <div class="card-header card-style">
+				    Inventory
+				  </div>
+				  <div class="card-block">
+				  	Group By:
+				  	Site
+				  	Model
+
+				  </div>
+
+				  <div class="card-block">
+
+
+				  	{% if devices == 'Error' %}
+
+				  		<div class="connectionerror">
+
+				  			Error connecting to database
+
+				  		</div>
+
+				  	{% else %}
+
+					  	{% for device in devices %}
+
+					  	<div class="devicerow row">
+
+					  		<div class="col-md-1 offset-md-1">
+
+					  			<input id="{{device}}" class="form-check-input devicecheckbox" type="checkbox" value="">
+
+					  		</div>
+
+					  		<div class="col-md-6">
+
+						  		{{device}}
+
+						  	</div>
+
+						  </div>
+
+						{% endfor %}
+
+
+				  	{% endif %}
+
+
+
+
+				  	</div> <!-- Card Block -->
+
+				</div> <!-- Card -->
+
+
+				</div>
+
+		    </div>
+
+		  </div> <!-- row -->
+
+		</div> <!-- container -->
+
+	</body>
+
+{% endblock %}

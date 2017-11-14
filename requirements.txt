@@ -1,0 +1,5 @@
+netmiko
+Flask
+flask-login
+pysqlite3
+requests
