@@ -1,19 +1,34 @@
-from flask import Flask, request, session, redirect, render_template
+from flask import Flask, request, session, redirect, render_template, g, url_for
+from functools import wraps
+
 
 from commandrunner import CommandRunner
 
-import requests, sqlite3, os, flask_login
+import requests, sqlite3, os
 
 application = Flask(__name__)
 application.config['DEBUG'] = True
 application.secret_key = 'as3r14saf3tGWEF'
 
-login_manager = flask_login.LoginManager()
-login_manager.init_app(application)
+#login_manager = flask_login.LoginManager()
+#login_manager.init_app(application)
 
 # Our mock database.
 users = {'testuser': {'password': 'secret'}}
 
+
+
+def login_required(f):
+	@wraps(f)
+	def decorated_function(*args, **kwargs):
+
+		if session['logged_in'] != True:
+
+			return redirect("/login", code=302)
+
+		return f(*args, **kwargs)
+
+	return decorated_function
 
 
 @application.route('/logout', methods=['GET', 'POST'])
@@ -52,42 +67,34 @@ def login():
 
 
 @application.route("/")
+@login_required
 def home(title=None, devices=None):
 
-
-	if not session.get('logged_in'):
-
-		title = "Admin"
-
-		return redirect("/login", code=302)
-
-	else:
-
-		title = "Home"
+	title = "Home"
 
 
-		try:
+	try:
 
-			conn = sqlite3.connect('confgrdb.db')
-			c = conn.cursor()
+		conn = sqlite3.connect('confgrdb.db')
+		c = conn.cursor()
 
-			selectdevicenames = """SELECT devicename from inventory"""
+		selectdevicenames = """SELECT devicename from inventory"""
 
-			devices = []
+		devices = []
 
-			c.execute(selectdevicenames)
-			data = c.fetchall()
+		c.execute(selectdevicenames)
+		data = c.fetchall()
 
-			for x in data:
+		for x in data:
 
-				devicename = str(x[0])
-				devices.append(devicename)
+			devicename = str(x[0])
+			devices.append(devicename)
 
-			conn.close()
+		conn.close()
 
-		except Exception:
+	except Exception:
 
-			devices = "Error"
+		devices = "Error"
 
 
 	return render_template('home.html', title=title, devices=devices)
@@ -96,6 +103,7 @@ def home(title=None, devices=None):
 @application.route("/inventory")
 @application.route("/inventory/")
 @application.route('/inventory/<name>')
+@login_required
 def inventory(name=None, title=None):
 
 	title = "Inventory"
@@ -104,20 +112,20 @@ def inventory(name=None, title=None):
 
 
 @application.route("/admin")
+@login_required
 def admin(title=None):
 
+	title = "Admin"
 
-	if not session.get('logged_in'):
+	return render_template('admin.html', title=title)
 
-		title = "Admin"
+@application.route("/profile")
+@login_required
+def profile(title=None):
 
-		return redirect("/login", code=302)
+	title = "Profile"
 
-	else:
-
-		title = "Admin"
-
-		return render_template('admin.html', title=title)
+	return render_template('profile.html', title=title)
 
 
 @application.route('/admin', methods=['POST'])
@@ -167,6 +175,7 @@ def admin_post():
 		return "Failed"
 
 @application.errorhandler(404)
+@login_required
 def page_not_found(e, title=None):
 
 	title = "404"
@@ -175,6 +184,7 @@ def page_not_found(e, title=None):
 
 
 @application.errorhandler(500)
+@login_required
 def server_error(e, title=None):
 
 	title = "500"
@@ -184,4 +194,4 @@ def server_error(e, title=None):
 
 
 if __name__ == "__main__":
-    application.run(host='0.0.0.0')
+	application.run(host='0.0.0.0')

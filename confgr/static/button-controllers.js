@@ -60,9 +60,6 @@ $(document).on('click','#loginbutton',function(){
 
 		success: function(data) {
 
-			console.log(data);
-
-
 			if(data == "True"){
 
 				window.location.replace("/");
@@ -70,11 +67,9 @@ $(document).on('click','#loginbutton',function(){
 			}
 			else{
 
-				console.log("Bad Password");
+				$('#login-result').text("Incorrect Login Information");
 
 			}
-
-
 
 		}
 
