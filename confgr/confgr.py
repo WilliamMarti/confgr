@@ -1,7 +1,4 @@
-from flask import Flask
-from flask import render_template
-from flask import request
-
+from flask import Flask, request, session, redirect, render_template
 
 from commandrunner import CommandRunner
 
@@ -9,6 +6,7 @@ import requests, sqlite3, os, flask_login
 
 application = Flask(__name__)
 application.config['DEBUG'] = True
+application.secret_key = 'as3r14saf3tGWEF'
 
 login_manager = flask_login.LoginManager()
 login_manager.init_app(application)
@@ -16,64 +14,80 @@ login_manager.init_app(application)
 # Our mock database.
 users = {'testuser': {'password': 'secret'}}
 
-@login_manager.user_loader
-def load_user(user_id):
-	return User.get(user_id)
+
+
+@application.route('/logout', methods=['GET', 'POST'])
+def logout():
+
+	session['username'] = None
+	session['logged_in'] = None
+
+	return render_template('login.html')
 
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
-    # Here we use a class of some kind to represent and validate our
-    # client-side form data. For example, WTForms is a library that will
-    # handle this for us, and we use a custom LoginForm to validate.
-    form = LoginForm()
-    if form.validate_on_submit():
-        # Login and validate the user.
-        # user should be an instance of your `User` class
-        login_user(user)
 
-        flask.flash('Logged in successfully.')
+	if request.method == 'POST':
 
-        next = flask.request.args.get('next')
-        # is_safe_url should check if the url is safe for redirects.
-        # See http://flask.pocoo.org/snippets/62/ for an example.
-        if not is_safe_url(next):
-            return flask.abort(400)
+		username = request.form['username']
+		password = request.form['password']
 
-        return flask.redirect(next or flask.url_for('index'))
+		session['username'] = request.form['username']
 
-    return flask.render_template('login.html', form=form)
+		if username == 'test' and password == 'test':
+
+			session['logged_in'] = True
+
+			return "True"
+
+		else:
+
+			return "False"
+
+	else:
+
+		return render_template('login.html')
 
 
 
 @application.route("/")
 def home(title=None, devices=None):
 
-	title = "Home"
+
+	if not session.get('logged_in'):
+
+		title = "Admin"
+
+		return redirect("/login", code=302)
+
+	else:
+
+		title = "Home"
 
 
-	try:
+		try:
 
-		conn = sqlite3.connect('confgrdb.db')
-		c = conn.cursor()
+			conn = sqlite3.connect('confgrdb.db')
+			c = conn.cursor()
 
-		selectdevicenames = """SELECT devicename from inventory"""
+			selectdevicenames = """SELECT devicename from inventory"""
 
-		devices = []
+			devices = []
 
-		c.execute(selectdevicenames)
-		data = c.fetchall()
+			c.execute(selectdevicenames)
+			data = c.fetchall()
 
-		for x in data:
+			for x in data:
 
-			devicename = str(x[0])
-			devices.append(devicename)
+				devicename = str(x[0])
+				devices.append(devicename)
 
-		conn.close()
+			conn.close()
 
-	except Exception:
+		except Exception:
 
-		devices = "Error"
+			devices = "Error"
 
 
 	return render_template('home.html', title=title, devices=devices)
@@ -92,9 +106,19 @@ def inventory(name=None, title=None):
 @application.route("/admin")
 def admin(title=None):
 
-	title = "Admin"
 
-	return render_template('admin.html', title=title)
+	if not session.get('logged_in'):
+
+		title = "Admin"
+
+		return redirect("/login", code=302)
+
+	else:
+
+		title = "Admin"
+
+		return render_template('admin.html', title=title)
+
 
 @application.route('/admin', methods=['POST'])
 def admin_post():

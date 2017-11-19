@@ -43,6 +43,47 @@ $(document).on('click','#netboxlinkbutton',function(){
 
 });
 
+
+
+$(document).on('click','#loginbutton',function(){
+
+	var username = $('#username').val();
+	var password = $('#password').val();
+
+
+	$.ajax({
+
+		type: "POST",
+		url: '/login',
+		data: {"username":username, "password":password},
+		timeout: 0,
+
+		success: function(data) {
+
+			console.log(data);
+
+
+			if(data == "True"){
+
+				window.location.replace("/");
+
+			}
+			else{
+
+				console.log("Bad Password");
+
+			}
+
+
+
+		}
+
+	});
+
+
+});
+
+
 $(document).on('click','.devicecheckbox',function(){
 
 	var clicked = $(this).attr('id');
