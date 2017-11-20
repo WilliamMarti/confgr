@@ -1,22 +1,16 @@
 from flask import Flask, request, session, redirect, render_template, g, url_for
 from functools import wraps
-
+from Crypto.Hash import SHA256
 
 from commandrunner import CommandRunner
 
-import requests, sqlite3, os
+import requests, sqlite3, os, bcrypt
 
 application = Flask(__name__)
 application.config['DEBUG'] = True
 application.secret_key = 'as3r14saf3tGWEF'
 
-#login_manager = flask_login.LoginManager()
-#login_manager.init_app(application)
-
-# Our mock database.
-users = {'testuser': {'password': 'secret'}}
-
-
+salt = "$2b$12$t8q0bzSdcveQ4A.GE/7TLu"
 
 def login_required(f):
 	@wraps(f)
@@ -48,9 +42,35 @@ def login():
 		username = request.form['username']
 		password = request.form['password']
 
+		password = bcrypt.hashpw(password.encode('utf8'), salt)
+
 		session['username'] = request.form['username']
 
-		if username == 'test' and password == 'test':
+
+		try:
+
+			conn = sqlite3.connect('confgrdb.db')
+			c = conn.cursor()
+
+			selectuser = """SELECT username, password FROM users WHERE username = '""" + username + """'"""
+			c.execute(selectuser)
+
+			result = c.fetchone()
+
+		except Exception:
+
+			return "Error"
+
+		if result == None:
+
+			return "False"
+
+		dbuser = result[0]
+		dbpassword = result[1]
+
+		c.close()
+
+		if username == dbuser and password == dbpassword:
 
 			session['logged_in'] = True
 
