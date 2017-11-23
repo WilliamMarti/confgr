@@ -16,11 +16,17 @@ def login_required(f):
 	@wraps(f)
 	def decorated_function(*args, **kwargs):
 
-		if session['logged_in'] != True:
+		try:
+
+			if session['logged_in'] != True:
+
+				return redirect("/login", code=302)
+
+			return f(*args, **kwargs)
+
+		except KeyError, e:
 
 			return redirect("/login", code=302)
-
-		return f(*args, **kwargs)
 
 	return decorated_function
 
@@ -117,7 +123,7 @@ def home(title=None, devices=None):
 		devices = "Error"
 
 
-	return render_template('home.html', title=title, devices=devices)
+	return render_template('home.html', title=title, devices=devices, username=session['username'])
 
 
 @application.route("/inventory")
@@ -128,7 +134,7 @@ def inventory(name=None, title=None):
 
 	title = "Inventory"
 
-	return render_template('inventory.html', name=name, title=title)
+	return render_template('inventory.html', name=name, title=title, username=session['username'])
 
 
 @application.route("/admin")
@@ -137,15 +143,70 @@ def admin(title=None):
 
 	title = "Admin"
 
-	return render_template('admin.html', title=title)
+	return render_template('admin.html', title=title, username=session['username'])
 
-@application.route("/profile")
+@application.route("/profile/<username>")
 @login_required
-def profile(title=None):
+def profile(username, title=None):
 
 	title = "Profile"
+	username = session['username']
 
-	return render_template('profile.html', title=title)
+	try:
+
+		conn = sqlite3.connect('confgrdb.db')
+		c = conn.cursor()
+
+		selectuser = """SELECT firstname, lastname, email FROM users WHERE username = '""" + username + """'"""
+		c.execute(selectuser)
+
+		result = c.fetchone()
+
+	except Exception:
+
+		return "Error"
+
+	firstname = result[0]
+	lastname = result[1]
+	email = result[2]
+
+
+	return render_template('profile.html', title=title, username=session['username'], firstname=firstname, lastname=lastname, email=email)
+
+
+@application.route("/profile/<username>/edit", methods=['GET'])
+@login_required
+def profileedit(username, title=None):
+
+	title = "Profile"
+	username = session['username']
+
+	try:
+
+		conn = sqlite3.connect('confgrdb.db')
+		c = conn.cursor()
+
+		selectuser = """SELECT firstname, lastname, email FROM users WHERE username = '""" + username + """'"""
+		c.execute(selectuser)
+
+		result = c.fetchone()
+
+	except Exception:
+
+		return "Error"
+
+	firstname = result[0]
+	lastname = result[1]
+	email = result[2]
+
+
+	return render_template('profileedit.html', title=title, username=session['username'], firstname=firstname, lastname=lastname, email=email)
+
+@application.route("/profile/<username>/edit", methods=['POST'])
+@login_required
+def profileedit_post(username, title=None):
+
+	return render_template('profileedit.html', title=title, username=session['username'], firstname=firstname, lastname=lastname, email=email)
 
 
 @application.route('/admin', methods=['POST'])
@@ -200,7 +261,7 @@ def page_not_found(e, title=None):
 
 	title = "404"
 
-	return render_template('404.html', title=title), 404
+	return render_template('404.html', title=title, username=session['username']), 404
 
 
 @application.errorhandler(500)
@@ -209,7 +270,7 @@ def server_error(e, title=None):
 
 	title = "500"
 
-	return render_template('500.html', title=title), 500
+	return render_template('500.html', title=title, username=session['username']), 500
 
 
 

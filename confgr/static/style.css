@@ -9,6 +9,9 @@
 	color:#fff;
 
 }
+.dropdown{
+	color:#fff;
+}
 
 .navbar-brand:hover{
 
@@ -77,5 +80,17 @@
 #login-result{
 
 	color:red;
+
+}
+
+#runbutton{
+
+	width:100%;
+
+}
+
+.card{
+
+	margin-bottom:25px;
 
 }

@@ -8,39 +8,49 @@
 
 		  <div class="row">
 
-		    <div class="col-md-6">
+		    <div class="col-md-8 offset-md-2">
 
 		    	<div class="card">
 
+
+
 				  <div class="card-header card-style">
-				    Link to Netbox API:
+				    User Info
 				  </div>
 
 				  <div class="card-block">
 
+					  <div class="row">
 
-				  </div>
+					  	<div class="col-md-10">
+
+						  	<div> 
+						  		<b>Username:</b> 
+						  		{{ username }}
+						  	</div>
+
+						  	<div> 
+						  		<b>Name: </b> 
+						  		{{ firstname }} {{ lastname }}
+						  	</div>
+						  	
+						  	<div> 
+						  		<b>Email:</b> 
+						  		{{ email }}
+						  	</div>
+
+
+				    	</div> <!-- col 10 -->
+
+					  	<div class="col-md-2">
+
+					  		<a class="btn btn-primary" href="/profile/{{ username }}/edit" role="button">Edit</a>
+
+					  	</div>  <!-- col 2 -->
+
+					  </div> <!-- row -->
 
 				</div> <!-- Card -->
-
-		    </div> <!-- column -->
-
-		    <div class="col-md-6">
-
-		    	<div class="card">
-
-				  <div class="card-header card-style">
-
-				  </div>
-
-				  <div class="card-block">
-
-
-
-				  </div>
-
-				</div> <!-- Card -->
-
 
 		    </div> <!-- column -->
 

@@ -5,14 +5,14 @@
 
     <title> {{ title }} </title>
     
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/tether/dist/css/tether.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/style.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/tether/dist/css/tether.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style.css" crossorigin="anonymous">
 
-    <script src="../static/tether/dist/js/tether.js" crossorigin="anonymous"></script>
+    <script src="/static/tether/dist/js/tether.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="../static/bootstrap/js/bootstrap.js" crossorigin="anonymous"></script>
-    <script src="../static/button-controllers.js" crossorigin="anonymous"></script>
+    <script src="/static/bootstrap/js/bootstrap.js" crossorigin="anonymous"></script>
+    <script src="/static/button-controllers.js" crossorigin="anonymous"></script>
     
 
   </header>
@@ -24,39 +24,37 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      <ul class="navbar-nav mr-auto">
+      {% if username is defined %}
 
-        <li class="nav-item active">
+        <ul class="navbar-nav mr-auto">
 
-          <a class="nav-link" href="/inventory">Inventory</a>
+          <li class="nav-item active">
 
-        </li>
+            <a class="nav-link" href="/inventory">Inventory</a>
 
-
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-
-        <li class="nav-item navbar-right">
-
-          <a class="nav-link custom-nav-link" href="/admin">Admin</a>
-
-        </li>
+          </li>
 
 
-        <li class="nav-item navbar-right">
+        </ul>
+      
 
-          <a class="nav-link custom-nav-link" href="/profile">Profile</a>
+        <ul class="nav navbar-nav navbar-right">
 
-        </li>
+          <li class="nav-item dropdown custom-nav-link">
+            <a class="nav-link dropdown-toggle custom-nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             {{ username }}
+             <img src="/static/icons/user-icon.png">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="/profile/{{ username }}">Profile</a>
+              <a class="dropdown-item" href="/admin">Admin</a>
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
+          </li>
 
-        <li class="nav-item navbar-right">
+        </ul>
 
-          <a class="nav-link custom-nav-link" href="/logout">Logout</a>
-
-        </li>
-
-      </ul>
+      {% endif %}
 
     </div>
 

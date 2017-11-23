@@ -79,6 +79,34 @@ $(document).on('click','#loginbutton',function(){
 });
 
 
+
+$(document).on('click','#profilesubmit',function(){
+
+	var first = $('#firstname').val();
+	var last = $('#lastname').val();
+	var email = $('#email').val();
+	var username = $('#profilesubmit').attr('id');
+
+	$.ajax({
+
+		type: "POST",
+		url: '/profileedit',
+		data: {"first":first, "last":last, "email":email},
+		timeout: 0,
+
+		success: function(data) {
+
+			console.log(username);
+			window.location.replace("/profile/" + username);
+
+		}
+
+	});
+
+
+});
+
+
 $(document).on('click','.devicecheckbox',function(){
 
 	var clicked = $(this).attr('id');
