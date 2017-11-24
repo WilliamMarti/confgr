@@ -24,13 +24,20 @@
 
 					  	<div class="col-md-12">
 
+					  		<div id="username">
+
+					  			<b>{{ username }} </b>
+
+					  		</div>
+
 							<form>
+
 							  <div class="form-group">
 							    <label for="firstname">First Name</label>
 							    <input type="text" class="form-control" id="firstname" placeholder="{{ firstname }}">
 							  </div>
 							  <div class="form-group">
-							    <label for="lastname">First Name</label>
+							    <label for="lastname">Last Name</label>
 							    <input type="text" class="form-control" id="lastname" placeholder="{{ lastname }}">
 							  </div>
 							  <div class="form-group">
@@ -38,7 +45,7 @@
 							    <input type="email" class="form-control" id="email" placeholder="{{ email }}">
 							  </div>
 
-							  <button type="profilesubmit" id="{{ username }}" class="btn btn-primary">Submit</button>
+							  <button type="profilesubmit" id="profilesubmit" class="btn btn-primary">Submit</button>
 
 							</form>
 

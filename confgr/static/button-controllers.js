@@ -85,24 +85,35 @@ $(document).on('click','#profilesubmit',function(){
 	var first = $('#firstname').val();
 	var last = $('#lastname').val();
 	var email = $('#email').val();
-	var username = $('#profilesubmit').attr('id');
+	var username = $('#username').text().trim();
 
 	$.ajax({
 
 		type: "POST",
 		url: '/profileedit',
-		data: {"first":first, "last":last, "email":email},
+		data: {"first":first, "last":last, "email":email, "username": username},
 		timeout: 0,
-
 		success: function(data) {
 
-			console.log(username);
-			window.location.replace("/profile/" + username);
+
+			console.log(data);
+			//window.location.replace("/profile/" + username);
 
 		}
 
 	});
 
+	console.log('getting here');
+
+	//window.location.replace("/profile/" + username);
+
+	//window.location.href='/'
+
+	//window.location.replace("/");
+
+	//window.location.replace("http://localhost:5000/");
+
+	//window.location.href = "http://localhost:5000/";
 
 });
 

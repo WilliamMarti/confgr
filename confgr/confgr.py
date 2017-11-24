@@ -1,6 +1,5 @@
 from flask import Flask, request, session, redirect, render_template, g, url_for
 from functools import wraps
-from Crypto.Hash import SHA256
 
 from commandrunner import CommandRunner
 
@@ -202,11 +201,40 @@ def profileedit(username, title=None):
 
 	return render_template('profileedit.html', title=title, username=session['username'], firstname=firstname, lastname=lastname, email=email)
 
-@application.route("/profile/<username>/edit", methods=['POST'])
+@application.route("/profileedit", methods=['POST'])
 @login_required
-def profileedit_post(username, title=None):
+def profileedit_post():
 
-	return render_template('profileedit.html', title=title, username=session['username'], firstname=firstname, lastname=lastname, email=email)
+	username = request.form['username']
+	first = request.form['first']
+	last = request.form['last']
+	email = request.form['email']
+
+	#if not first:
+
+	try:
+
+		conn = sqlite3.connect('confgrdb.db')
+		
+		c = conn.cursor()
+		update = """UPDATE users SET firstname='""" + first + """' WHERE username='""" + username + """'"""
+		c.execute(update)
+
+		conn.commit()
+		conn.close()
+
+	except Exception:
+
+		return "Error"
+
+
+	#return redirect("/", code=302)
+
+	return "Good"
+
+	#return redirect("/profile/" + username, code=302)
+
+	#return render_template('profileedit.html', title=title, username=session['username'], firstname=firstname, lastname=lastname, email=email)
 
 
 @application.route('/admin', methods=['POST'])
@@ -238,7 +266,6 @@ def admin_post():
 						VALUES
 						('""" + devicename + """', '""" + devicesite + """', '""" + devicemodel + """')"""
 
-		#c.execute("""INSERT INTO inventory (devicename, devicesite, devicemodel) VALUES ('""" + devicename + """','""" + devicesite + """','""" + devicemodel + """')""")
 		c.execute(insertdevice)
 
 	conn.commit()
