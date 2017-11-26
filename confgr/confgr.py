@@ -1,4 +1,4 @@
-from flask import Flask, request, session, redirect, render_template, g, url_for
+from flask import Flask, request, session, redirect, render_template, g, url_for, jsonify
 from functools import wraps
 
 from commandrunner import CommandRunner
@@ -225,12 +225,13 @@ def profileedit_post():
 
 	except Exception:
 
-		return "Error"
+		return "test"
 
 
 	#return redirect("/", code=302)
+	print first
+	return first
 
-	return "Good"
 
 	#return redirect("/profile/" + username, code=302)
 

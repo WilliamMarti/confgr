@@ -93,19 +93,27 @@ $(document).on('click','#profilesubmit',function(){
 		url: '/profileedit',
 		data: {"first":first, "last":last, "email":email, "username": username},
 		timeout: 0,
+
 		success: function(data) {
 
-
+			console.log("test");
 			console.log(data);
 			//window.location.replace("/profile/" + username);
 
-		}
+
+
+		},
+		complete: function(data) {
+
+			window.location.replace("/profile/" + username);
+
+		} 
 
 	});
 
-	console.log('getting here');
 
-	//window.location.replace("/profile/" + username);
+
+
 
 	//window.location.href='/'
 
