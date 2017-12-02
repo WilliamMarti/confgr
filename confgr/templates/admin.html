@@ -87,6 +87,35 @@
 				  <div class="card-block">
 
 
+				  	<div class="row">
+
+				  		<div class="col-md-4">
+
+				  		{% for user in userlist %}
+
+					  		<div class="row">
+
+					  			<div class="col-md-4">
+
+					  				<a href="/profile/{{ user[2] }}">{{ user[2] }}</a>
+
+					  			</div>
+
+					  		</div>
+
+					  	{% endfor %}
+
+					  	</div>
+
+				  		<div class="col-md-3 offset-md-5">
+
+							<a class="btn btn-primary btn-sm" href="/createuser" role="button">Create User</a>
+
+				  		</div>
+
+
+				  	</div>
+
 				  </div>
 
 				</div> <!-- Card -->

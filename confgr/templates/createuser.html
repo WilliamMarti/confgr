@@ -15,7 +15,7 @@
 
 
 				  <div class="card-header card-style">
-				    User Info
+				    Create User
 				  </div>
 
 				  <div class="card-block">
@@ -24,27 +24,28 @@
 
 					  	<div class="col-md-12">
 
-					  		<div id="username">
-
-					  			<b>{{ username }} </b>
-
-					  		</div>
-
 							<form>
 
 							  <div class="form-group">
+							    <label for="firstname">Username:</label>
+							    <input type="text" class="form-control" id="username">
+							  </div>
+							  <div class="form-group">
+							    <label for="firstname">Password</label>
+							    <input type="password" class="form-control" id="password">
+							  </div>
+							  <div class="form-group">
 							    <label for="firstname">First Name</label>
-							    <input type="text" class="form-control" id="firstname" placeholder="{{ firstname }}">
+							    <input type="text" class="form-control" id="firstname">
 							  </div>
 							  <div class="form-group">
 							    <label for="lastname">Last Name</label>
-							    <input type="text" class="form-control" id="lastname" placeholder="{{ lastname }}">
+							    <input type="text" class="form-control" id="lastname">
 							  </div>
 							  <div class="form-group">
 							    <label for="email">Email address</label>
-							    <input type="email" class="form-control" id="email" placeholder="{{ email }}">
+							    <input type="email" class="form-control" id="email">
 							  </div>
-
 
 							  <button type="profilecancel" id="profilecancel" class="btn btn-secondary">Cancel</button>
 							  <button type="profilesubmit" id="profilesubmit" class="btn btn-primary">Submit</button>

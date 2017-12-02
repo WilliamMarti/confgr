@@ -142,14 +142,33 @@ def admin(title=None):
 
 	title = "Admin"
 
-	return render_template('admin.html', title=title, username=session['username'])
+	try:
+
+		conn = sqlite3.connect('confgrdb.db')
+		c = conn.cursor()
+
+		selectuser = """SELECT firstname, lastname, username FROM users"""
+		c.execute(selectuser)
+
+		results = c.fetchall()
+
+	except Exception:
+
+		return "Error"
+
+	userlist = results
+
+
+	return render_template('admin.html', title=title, username=session['username'], userlist=userlist)
 
 @application.route("/profile/<username>")
 @login_required
 def profile(username, title=None):
 
 	title = "Profile"
-	username = session['username']
+	username = username
+
+	print username
 
 	try:
 
@@ -160,6 +179,8 @@ def profile(username, title=None):
 		c.execute(selectuser)
 
 		result = c.fetchone()
+
+		print result
 
 	except Exception:
 
@@ -201,6 +222,64 @@ def profileedit(username, title=None):
 
 	return render_template('profileedit.html', title=title, username=session['username'], firstname=firstname, lastname=lastname, email=email)
 
+
+@application.route("/createuser", methods=['GET'])
+@login_required
+def createuser(title=None):
+
+	title = "Profile"
+	username = session['username']
+
+	try:
+
+		conn = sqlite3.connect('confgrdb.db')
+		c = conn.cursor()
+
+		selectuser = """SELECT firstname, lastname, email FROM users WHERE username = '""" + username + """'"""
+		c.execute(selectuser)
+
+		result = c.fetchone()
+
+	except Exception:
+
+		return "Error"
+
+
+	return render_template('createuser.html', title=title, username=session['username'])
+
+@application.route("/createuser", methods=['POST'])
+@login_required
+def createuser_post(title=None):
+
+
+	username = request.form['username']
+	first = request.form['first']
+	last = request.form['last']
+	email = request.form['email']
+
+	#if not first:
+
+	try:
+
+		conn = sqlite3.connect('confgrdb.db')
+		
+		c = conn.cursor()
+		insertdevice = """INSERT INTO inventory 
+								(username, firstname, lastname, email)
+								VALUES
+								('""" + username + """', '""" + firstname + """', '""" + lastname + """', '""" + email + """')"""
+		c.execute(insertdevice)
+
+		conn.commit()
+		conn.close()
+
+	except Exception:
+
+		return "test"
+
+	return username
+
+
 @application.route("/profileedit", methods=['POST'])
 @login_required
 def profileedit_post():
@@ -227,15 +306,8 @@ def profileedit_post():
 
 		return "test"
 
-
-	#return redirect("/", code=302)
-	print first
 	return first
 
-
-	#return redirect("/profile/" + username, code=302)
-
-	#return render_template('profileedit.html', title=title, username=session['username'], firstname=firstname, lastname=lastname, email=email)
 
 
 @application.route('/admin', methods=['POST'])
