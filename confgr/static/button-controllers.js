@@ -113,16 +113,6 @@ $(document).on('click','#profilesubmit',function(){
 
 
 
-
-
-	//window.location.href='/'
-
-	//window.location.replace("/");
-
-	//window.location.replace("http://localhost:5000/");
-
-	//window.location.href = "http://localhost:5000/";
-
 });
 
 
@@ -153,6 +143,63 @@ $(document).on('click','.devicecheckbox',function(){
 		selected.pop(clicked);
 
 	}
+
+
+
+});
+
+
+$(document).on('click','#createuser',function(){
+
+	var username = $('#username').val();
+	var first = $('#firstname').val();
+	var last = $('#lastname').val();
+	var email = $('#email').val();
+
+	$.ajax({
+
+		type: "POST",
+		url: '/createuser',
+		data: {"username": username, "password":$('#password').val(), "first":first, "last":last, "email":email},
+		timeout: 0,
+
+		complete: function(data) {
+
+			window.location.replace("/admin");
+
+		} 
+
+	});
+
+
+
+});
+
+$(document).on('click','#deleteuser',function(){
+
+	var username = $('#username').text();
+
+	console.log(username[0]);
+
+
+	username = username.split();
+
+	console.log(username)
+
+	$.ajax({
+
+		type: "POST",
+		url: '/deleteuser',
+		data: {"username": username},
+		timeout: 0,
+
+		complete: function(data) {
+
+			//window.location.replace("/admin");
+
+		} 
+
+	});
 
 
 

@@ -253,6 +253,7 @@ def createuser_post(title=None):
 
 
 	username = request.form['username']
+	password = request.form['password']
 	first = request.form['first']
 	last = request.form['last']
 	email = request.form['email']
@@ -264,11 +265,13 @@ def createuser_post(title=None):
 		conn = sqlite3.connect('confgrdb.db')
 		
 		c = conn.cursor()
-		insertdevice = """INSERT INTO inventory 
-								(username, firstname, lastname, email)
+		insertuser = """INSERT INTO users 
+								(username, password, firstname, lastname, email)
 								VALUES
-								('""" + username + """', '""" + firstname + """', '""" + lastname + """', '""" + email + """')"""
-		c.execute(insertdevice)
+								('""" + username + """', '""" + password + """', '""" + first + """', '""" + last + """', '""" + email + """')"""
+
+
+		c.execute(insertuser)
 
 		conn.commit()
 		conn.close()
@@ -277,8 +280,37 @@ def createuser_post(title=None):
 
 		return "test"
 
-	return username
 
+	return "Created"
+
+@application.route("/deleteuser", methods=['POST'])
+@login_required
+def deleteuser_post(title=None):
+
+
+	username = request.form['username']
+
+
+	#if not first:
+
+	try:
+
+		conn = sqlite3.connect('confgrdb.db')
+		
+		c = conn.cursor()
+		deleteuser = """DELETE FROM users WHERE username = '""" + username + """'"""
+
+		c.execute(deleteuser)
+
+		conn.commit()
+		conn.close()
+
+	except Exception:
+
+		return "test"
+
+
+	return "Deleted"
 
 @application.route("/profileedit", methods=['POST'])
 @login_required
