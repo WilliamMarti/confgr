@@ -177,15 +177,12 @@ $(document).on('click','#createuser',function(){
 
 $(document).on('click','#deleteuserconfirm',function(){
 
-	var username = $('#username').text();
+	var username = $('#user').text().trim();
 
-	console.log(username[0]);
+	console.log(username);
 
 
-	username = username.split();
-
-	console.log(username)
-
+	
 	$.ajax({
 
 		type: "POST",
@@ -195,11 +192,14 @@ $(document).on('click','#deleteuserconfirm',function(){
 
 		complete: function(data) {
 
-			//window.location.replace("/admin");
+			window.location.replace("/admin");
 
 		} 
 
 	});
+	
+
+
 
 });
 
