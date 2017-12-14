@@ -175,7 +175,7 @@ $(document).on('click','#createuser',function(){
 
 });
 
-$(document).on('click','#deleteuser',function(){
+$(document).on('click','#deleteuserconfirm',function(){
 
 	var username = $('#username').text();
 
@@ -201,6 +201,19 @@ $(document).on('click','#deleteuser',function(){
 
 	});
 
+});
+
+
+$(document).on('click','#deleteuser',function(){
+
+	$('#deleteusermodal').modal("toggle");
+
+});
+
+
+$(document).on('click','#deleteusercancel',function(){
+
+	$('#deleteusermodal').modal("toggle");
 
 
 });
