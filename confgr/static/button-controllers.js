@@ -179,10 +179,6 @@ $(document).on('click','#deleteuserconfirm',function(){
 
 	var username = $('#user').text().trim();
 
-	console.log(username);
-
-
-	
 	$.ajax({
 
 		type: "POST",
@@ -197,9 +193,6 @@ $(document).on('click','#deleteuserconfirm',function(){
 		} 
 
 	});
-	
-
-
 
 });
 
@@ -215,5 +208,29 @@ $(document).on('click','#deleteusercancel',function(){
 
 	$('#deleteusermodal').modal("toggle");
 
+
+});
+
+
+$(document).on('click','#runbutton',function(){
+
+	var deviceusername = $('#deviceusername').text().trim();
+	var devicepassword = $('#devicepassword').text().trim();
+	var commandstorun = $('#commandstorun').text().trim();
+
+	$.ajax({
+
+		type: "POST",
+		url: '/runcommands',
+		data: {"deviceusername": deviceusername, "devicepassword": devicepassword, "commandstorun": commandstorun},
+		timeout: 0,
+
+		complete: function(data) {
+
+			window.location.replace("/admin");
+
+		} 
+
+	});
 
 });
