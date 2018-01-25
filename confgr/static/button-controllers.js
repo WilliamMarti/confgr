@@ -214,22 +214,25 @@ $(document).on('click','#deleteusercancel',function(){
 
 $(document).on('click','#runbutton',function(){
 
-	var deviceusername = $('#deviceusername').text().trim();
-	var devicepassword = $('#devicepassword').text().trim();
-	var commandstorun = $('#commandstorun').text().trim();
+
+	var device = "10.0.0.2"
+	var deviceusername = $('#deviceusername').val().trim();
+	var devicepassword = $('#devicepassword').val().trim();
+	var commandstorun = $('#commandstorun').val().trim();
+
+	console.log(deviceusername);
 
 	$.ajax({
 
 		type: "POST",
 		url: '/runcommands',
-		data: {"deviceusername": deviceusername, "devicepassword": devicepassword, "commandstorun": commandstorun},
+		data: {"device": device,"deviceusername": deviceusername, "devicepassword": devicepassword, "commandstorun": commandstorun},
 		timeout: 0,
 
 		complete: function(data) {
 
-			window.location.replace("/admin");
 
-		} 
+		}
 
 	});
 

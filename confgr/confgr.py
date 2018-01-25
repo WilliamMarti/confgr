@@ -290,9 +290,6 @@ def deleteuser_post(title=None):
 
 	username = request.form['username']
 
-
-	#if not first:
-
 	try:
 
 		conn = sqlite3.connect('confgrdb.db')
@@ -321,8 +318,6 @@ def profileedit_post():
 	last = request.form['last']
 	email = request.form['email']
 
-	#if not first:
-
 	try:
 
 		conn = sqlite3.connect('confgrdb.db')
@@ -336,7 +331,7 @@ def profileedit_post():
 
 	except Exception:
 
-		return "test"
+		return "Error"
 
 	return first
 
@@ -376,9 +371,6 @@ def admin_post():
 	conn.commit()
 	conn.close()
 
-
-
-
 	if responsecode == "<Response [200]>":
 
 		return "Connected"
@@ -386,6 +378,24 @@ def admin_post():
 	else:
 
 		return "Failed"
+
+@application.route('/runcommands', methods=['POST'])
+def runcommands():
+
+	device = request.form['deviceusername']
+	deviceusername = request.form['deviceusername']
+	devicepassword = request.form['devicepassword']
+	commandstorun = request.form['commandstorun']
+
+	commandlist = commandstorun.split()
+
+	runner = CommandRunner(device, deviceusername, devicepassword)
+
+	runner.test()
+
+	print "Device Username: " + deviceusername
+
+	return "Complete"
 
 @application.errorhandler(404)
 @login_required
