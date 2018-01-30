@@ -7,25 +7,21 @@ class CommandRunner:
 	def __init__(self, ip, username, password):
 
 		device = {
-			'device_type': 'cisco_ios_telnet',
+			'device_type': 'cisco_ios',
 			'ip': ip,
 			'username': username,
 			'password': password
 		}
 
-		NetController.net_connect = ConnectHandler(**device)
+		self.net_connect = ConnectHandler(**device)
 
-		NetController.net_connect.enable()
+		self.net_connect.enable()
 
 
 	def command(self, commandlist):
 
-		print commandlist
+		commandlist = commandlist.splitlines()
 
-		for i in range(len(commandlist)):
-			output = NetController.net_connect.send_command(commandlist[i])
-			print output
+		output = self.net_connect.send_config_set(commandlist)
 
-	def test():
-
-		print "test"
+		return output

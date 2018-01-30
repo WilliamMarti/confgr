@@ -382,7 +382,7 @@ def admin_post():
 @application.route('/runcommands', methods=['POST'])
 def runcommands():
 
-	device = request.form['deviceusername']
+	device = request.form['device']
 	deviceusername = request.form['deviceusername']
 	devicepassword = request.form['devicepassword']
 	commandstorun = request.form['commandstorun']
@@ -391,11 +391,11 @@ def runcommands():
 
 	runner = CommandRunner(device, deviceusername, devicepassword)
 
-	runner.test()
+	output = runner.command(commandstorun)
 
-	print "Device Username: " + deviceusername
+	print output
 
-	return "Complete"
+	return output
 
 @application.errorhandler(404)
 @login_required

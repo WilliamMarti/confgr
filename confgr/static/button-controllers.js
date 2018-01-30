@@ -23,8 +23,6 @@ $(document).on('click','#netboxlinkbutton',function(){
 				$("#netboxconnectionstatus").html("Connected");
 				$("#netboxconnectionstatus").css('color', 'green');
 				
-				console.log(data);
-
 			}
 			else {
 
@@ -96,10 +94,6 @@ $(document).on('click','#profilesubmit',function(){
 
 		success: function(data) {
 
-			console.log("test");
-			console.log(data);
-			//window.location.replace("/profile/" + username);
-
 
 
 		},
@@ -120,9 +114,6 @@ $(document).on('click','.devicecheckbox',function(){
 
 	var clicked = $(this).attr('id');
 
-	//console.log(clicked);
-
-	console.log($(this).is(':checked'));
 
 	if ($(this).is(':checked') == true){
 
@@ -220,8 +211,6 @@ $(document).on('click','#runbutton',function(){
 	var devicepassword = $('#devicepassword').val().trim();
 	var commandstorun = $('#commandstorun').val().trim();
 
-	console.log(deviceusername);
-
 	$.ajax({
 
 		type: "POST",
@@ -230,6 +219,8 @@ $(document).on('click','#runbutton',function(){
 		timeout: 0,
 
 		complete: function(data) {
+
+			console.log(data['responseText']);
 
 
 		}
