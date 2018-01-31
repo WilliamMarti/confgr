@@ -382,16 +382,23 @@ def admin_post():
 @application.route('/runcommands', methods=['POST'])
 def runcommands():
 
-	device = request.form['device']
+	devicelist = request.form['devicelist'].split("|")
 	deviceusername = request.form['deviceusername']
 	devicepassword = request.form['devicepassword']
 	commandstorun = request.form['commandstorun']
 
+	print devicelist
+
 	commandlist = commandstorun.split()
 
-	runner = CommandRunner(device, deviceusername, devicepassword)
+	# last item is empty
+	for device in devicelist[:-1]:
 
-	output = runner.command(commandstorun)
+		runner = CommandRunner(device, deviceusername, devicepassword)
+
+		output = runner.command(commandstorun)
+
+		runner.disconnect()
 
 	print output
 

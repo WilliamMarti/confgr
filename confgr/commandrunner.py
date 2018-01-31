@@ -25,3 +25,8 @@ class CommandRunner:
 		output = self.net_connect.send_config_set(commandlist)
 
 		return output
+
+
+	def disconnect(self):
+
+		self.net_connect.disconnect()

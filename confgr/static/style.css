@@ -94,3 +94,10 @@
 	margin-bottom:25px;
 
 }
+
+#clioutput {
+
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: .75em;
+
+}

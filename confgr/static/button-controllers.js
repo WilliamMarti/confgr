@@ -118,7 +118,7 @@ $(document).on('click','.devicecheckbox',function(){
 	if ($(this).is(':checked') == true){
 
 		var newrow = "<div id='selected" + clicked + "' class='row'>\
-						<div class='col-md-12'>\
+						<div id=selecteddevice-" + clicked + " class='col-md-12'>\
 							" + clicked + "\
 						</div>\
 					</div>";
@@ -206,25 +206,53 @@ $(document).on('click','#deleteusercancel',function(){
 $(document).on('click','#runbutton',function(){
 
 
-	var device = "10.0.0.2"
+	//var device = "10.0.0.2"
+	var devices = $('div[id^="selecteddevice-"]').text().trim().replace("\\t","");
+
+	devices = devices.split("\t");
+	devicelist = "";
+
+	for (x = 0; x < devices.length; x++){
+
+		if (devices[x] != ""){
+
+			devicelist += devices[x] + "|";
+
+		}
+
+	}
+	
+
 	var deviceusername = $('#deviceusername').val().trim();
 	var devicepassword = $('#devicepassword').val().trim();
 	var commandstorun = $('#commandstorun').val().trim();
 
+	$("#clioutput").html("");
+	$("#resultscard").show();
+
+	console.log(devicelist);
+	
 	$.ajax({
 
 		type: "POST",
 		url: '/runcommands',
-		data: {"device": device,"deviceusername": deviceusername, "devicepassword": devicepassword, "commandstorun": commandstorun},
+		data: {"devicelist": devicelist,"deviceusername": deviceusername, "devicepassword": devicepassword, "commandstorun": commandstorun},
 		timeout: 0,
 
 		complete: function(data) {
 
-			console.log(data['responseText']);
+			var results = data['responseText'].split("\n");
 
+			for (x = 0; x<results.length; x++) {
+
+				$("#clioutput").append(results[x] + "<br>");
+
+			}
 
 		}
 
 	});
+
+	
 
 });
