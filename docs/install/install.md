@@ -4,16 +4,20 @@
 
 ```
 sudo apt-get install update
-`sudo apt-get install upgrade
+sudo apt-get install upgrade
 ```
 
 ### Installing pip
 
-`sudo apt-get install python-pip`
+```
+sudo apt-get install python-pip
+```
 
 ### Installing sqlite3
 
-`sudo apt-get install sqlite3`
+```
+sudo apt-get install sqlite3
+```
 
 ### Create Application Directory
 
@@ -24,6 +28,8 @@ sudo mkdir confgr
 
 ### Clone git repo
 
-`sudo git clone https://github.com/WilliamMarti/confgr.git .`
+```
+sudo git clone https://github.com/WilliamMarti/confgr.git .
+```
 
 
