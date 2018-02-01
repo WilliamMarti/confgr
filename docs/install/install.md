@@ -22,5 +22,5 @@
 
 `sudo git clone https://github.com/WilliamMarti/confgr.git .`
 
-Getting source from github repo
+### Getting source from github repo
 
