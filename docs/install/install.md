@@ -3,6 +3,7 @@
 ### Getting OS up-to-date
 
 `sudo apt-get install update`
+
 `sudo apt-get install upgrade`
 
 ### Installing pip
@@ -16,11 +17,11 @@
 ### Create Application Directory
 
 `cd /opt`
+
 `sudo mkdir confgr`
 
 ### Clone git repo
 
 `sudo git clone https://github.com/WilliamMarti/confgr.git .`
 
-### Getting source from github repo
 
