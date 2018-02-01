@@ -16,9 +16,9 @@
 
 ### Create Application Directory
 
-`cd /opt`
+`cd /opt
 
-`sudo mkdir confgr`
+sudo mkdir confgr`
 
 ### Clone git repo
 
