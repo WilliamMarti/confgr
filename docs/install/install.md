@@ -24,6 +24,7 @@ sudo apt-get install sqlite3
 ```
 cd /opt
 sudo mkdir confgr
+cd /confgr
 ```
 
 ### Clone git repo
