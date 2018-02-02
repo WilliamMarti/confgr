@@ -147,20 +147,37 @@ $(document).on('click','#createuser',function(){
 	var last = $('#lastname').val();
 	var email = $('#email').val();
 
-	$.ajax({
+	var password = $('#password').val();
+	var confirmpassword = $('#confirmpassword').val();
 
-		type: "POST",
-		url: '/createuser',
-		data: {"username": username, "password":$('#password').val(), "first":first, "last":last, "email":email},
-		timeout: 0,
+	if (password == confirmpassword) {
 
-		complete: function(data) {
 
-			window.location.replace("/admin");
+		$.ajax({
 
-		} 
+			type: "POST",
+			url: '/createuser',
+			data: {"username": username, "password":password, "first":first, "last":last, "email":email},
+			timeout: 0,
 
-	});
+			complete: function(data) {
+
+				window.location.replace("/admin");
+
+			} 
+
+		});
+
+	} 
+	else {
+
+		alert("Passwords do not match");
+
+
+	}
+
+
+
 
 
 
@@ -229,8 +246,6 @@ $(document).on('click','#runbutton',function(){
 
 	$("#clioutput").html("");
 	$("#resultscard").show();
-
-	console.log(devicelist);
 	
 	$.ajax({
 

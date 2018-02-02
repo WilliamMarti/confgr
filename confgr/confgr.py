@@ -166,21 +166,16 @@ def admin(title=None):
 def profile(username, title=None):
 
 	title = "Profile"
-	username = username
-
-	print username
 
 	try:
 
 		conn = sqlite3.connect('confgrdb.db')
 		c = conn.cursor()
 
-		selectuser = """SELECT firstname, lastname, email FROM users WHERE username = '""" + username + """'"""
+		selectuser = """SELECT firstname, lastname, email, username FROM users WHERE username = '""" + username + """'"""
 		c.execute(selectuser)
 
 		result = c.fetchone()
-
-		print result
 
 	except Exception:
 
@@ -189,9 +184,10 @@ def profile(username, title=None):
 	firstname = result[0]
 	lastname = result[1]
 	email = result[2]
+	searchedusername = result[3]
 
 
-	return render_template('profile.html', title=title, username=session['username'], firstname=firstname, lastname=lastname, email=email)
+	return render_template('profile.html', title=title, username=session['username'], firstname=firstname, lastname=lastname, email=email, searchedusername=searchedusername)
 
 
 @application.route("/profile/<username>/edit", methods=['GET'])
@@ -258,7 +254,8 @@ def createuser_post(title=None):
 	last = request.form['last']
 	email = request.form['email']
 
-	#if not first:
+
+	password = bcrypt.hashpw(password.encode('utf8'), salt)
 
 	try:
 
@@ -387,8 +384,6 @@ def runcommands():
 	devicepassword = request.form['devicepassword']
 	commandstorun = request.form['commandstorun']
 
-	print devicelist
-
 	commandlist = commandstorun.split()
 
 	# last item is empty
@@ -399,8 +394,6 @@ def runcommands():
 		output = runner.command(commandstorun)
 
 		runner.disconnect()
-
-	print output
 
 	return output
 

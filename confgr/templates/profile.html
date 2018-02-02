@@ -17,7 +17,7 @@
 					<ol class="breadcrumb">
 					  <li class="breadcrumb-item"><a href="/">Home</a></li>
 					  <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-					  <li class="breadcrumb-item active">{{ username }}</li>
+					  <li class="breadcrumb-item active">{{ searchedusername }}</li>
 					</ol>
 
 			    </div>
@@ -44,7 +44,7 @@
 
 						  	<div id="different"> 
 						  		<b>Username:</b> 
-						  		{{ username }}
+						  		{{ searchedusername }}
 						  	</div>
 
 						  	<div> 
@@ -65,7 +65,7 @@
 					  		<div class="row">
 
 					  			<div class="offset-md-2 col-md-3">
-					  				<a class="btn btn-primary" href="/profile/{{ username }}/edit" role="button">Edit</a>
+					  				<a class="btn btn-primary" href="/profile/{{ searchedusername }}/edit" role="button">Edit</a>
 					  			</div>
 
 					  			<div class="offset-md-1 col-md-3">

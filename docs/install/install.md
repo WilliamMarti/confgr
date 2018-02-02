@@ -39,4 +39,12 @@ sudo git clone https://github.com/WilliamMarti/confgr.git .
 sudo pip install -r requirements.txt
 ```
 
+### Run the application
 
+```
+cd confgr
+python confgr.py
+```
+
+
+This will get you up and running.  For a more scaleable server using gunicorn as a webserver will be the long term solution.
