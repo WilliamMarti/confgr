@@ -33,4 +33,10 @@ cd confgr
 sudo git clone https://github.com/WilliamMarti/confgr.git .
 ```
 
+### Install packages from requirements.txt file 
+
+```
+sudo pip install -r requirements.txt
+```
+
 
