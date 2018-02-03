@@ -3,7 +3,7 @@
 {% block body %}
 
 	<div id="user" style="visibility: hidden;">
-		{{ username }}
+		{{ searchedusername }}
 	</div>
 
 	<body>
@@ -99,7 +99,7 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <p>Are you use you want to delete {{ username }}?</p>
+	        <p>Are you use you want to delete {{ searchedusername }}?</p>
 	      </div>
 	      <div class="modal-footer">
 	        <button id="deleteuserconfirm" type="button" class="btn btn-primary">Yes</button>

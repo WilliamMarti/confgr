@@ -150,6 +150,9 @@ $(document).on('click','#createuser',function(){
 	var password = $('#password').val();
 	var confirmpassword = $('#confirmpassword').val();
 
+
+	
+
 	if (password == confirmpassword) {
 
 
@@ -171,7 +174,7 @@ $(document).on('click','#createuser',function(){
 	} 
 	else {
 
-		alert("Passwords do not match");
+		$("#passwordmismatchmodal").modal("toggle");
 
 
 	}
@@ -218,6 +221,14 @@ $(document).on('click','#deleteusercancel',function(){
 
 
 });
+
+$(document).on('click','#passwordmismatchcancel',function(){
+
+	$('#passwordmismatchmodal').modal("toggle");
+
+
+});
+
 
 
 $(document).on('click','#runbutton',function(){
