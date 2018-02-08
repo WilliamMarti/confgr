@@ -137,6 +137,7 @@ def inventory(name=None, title=None):
 
 
 @application.route("/admin")
+@application.route("/admin/")
 @login_required
 def admin(title=None):
 
@@ -275,10 +276,10 @@ def createuser_post(title=None):
 
 	except Exception:
 
-		return "test"
+		return "Error", 500
 
 
-	return "Created"
+	return "Created", 201
 
 @application.route("/deleteuser", methods=['POST'])
 @login_required
@@ -301,10 +302,10 @@ def deleteuser_post(title=None):
 
 	except Exception:
 
-		return "test"
+		return "Error", 500
 
 
-	return "Deleted"
+	return "Deleted", 200
 
 @application.route("/profileedit", methods=['POST'])
 @login_required
