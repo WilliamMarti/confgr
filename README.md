@@ -6,7 +6,7 @@
 # confgr
 Configure Cisco Network Equipment
 
-Build to be a simple web from end to the Netmiko library.  Lightweight system that levereages your existing [Netbox](https://github.com/digitalocean/netbox) inventory for device information.  
+Built to be a simple web front end to the Netmiko library.  Lightweight system that levereges your existing [Netbox](https://github.com/digitalocean/netbox) inventory for device information.  
 
 
 ![Confgr](docs/media/homepage.png?raw=true "Homepage")
