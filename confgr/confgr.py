@@ -51,7 +51,6 @@ def login():
 
 		session['username'] = request.form['username']
 
-
 		try:
 
 			conn = sqlite3.connect('confgrdb.db')
@@ -256,7 +255,6 @@ def createuser_post(title=None):
 	email = request.form['email']
 
 
-
 	password = bcrypt.hashpw(password.encode('utf8'), salt)
 
 	try:
@@ -332,7 +330,7 @@ def profileedit_post():
 
 		return "Error"
 
-	return "Updated", 200
+	return first
 
 
 

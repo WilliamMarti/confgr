@@ -5,3 +5,7 @@
 
 # confgr
 Configure Cisco Network Equipment
+
+
+![Confgr](docs/media/homepage.png?raw=true "Homepage")
+
