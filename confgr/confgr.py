@@ -256,6 +256,7 @@ def createuser_post(title=None):
 	email = request.form['email']
 
 
+
 	password = bcrypt.hashpw(password.encode('utf8'), salt)
 
 	try:
@@ -331,7 +332,7 @@ def profileedit_post():
 
 		return "Error"
 
-	return first
+	return "Updated", 200
 
 
 

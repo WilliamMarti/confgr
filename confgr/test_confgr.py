@@ -112,9 +112,29 @@ class BasicTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Deleted', response.data)
 
-
     def test_profile_edit(self):
-        pass
+
+        # Login
+        username = 'newuser'
+        response = self.login(username, 'test')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'True', response.data)
+
+
+        newusername = "this is a test"
+        newfirst = "this is a test"
+        newlast = "this is a test"
+        newemail = "this is a test"
+
+
+        # Edit User
+        response = self.application.post(
+            '/profileedit',
+            data=dict(username=newusername, password=newfirst, first=newfirst, last=newlast, email=newemail),
+            follow_redirects=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Updated', response.data)
 
 
     # test 404 page 
