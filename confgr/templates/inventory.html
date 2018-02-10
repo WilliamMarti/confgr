@@ -22,26 +22,43 @@
 
 					</div>
 
-					<div class="card-block">
 
-
-
-						test
-
-					</div>
 
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Cras justo odio</li>
-						<li class="list-group-item">Dapibus ac facilisis in</li>
-						<li class="list-group-item">Vestibulum at eros</li>
+
+					{% for device in devices %}
+
+						<li class="list-group-item">
+
+
+							<div class="row">
+
+								<div class="col-md-8">
+
+									{{ device }}
+
+								</div>
+
+								<div class="col-md-4">
+
+									test
+
+								</div>
+
+								<div class="col-md-4">
+
+									test
+
+								</div>
+
+							</div>
+
+						</li>
+
+
+					{% endfor %}
+
 					</ul>
-
-
-				    <div class="card-block">
-
-						This is some text within a card block.
-
-					</div>
 
 				</div> <!-- Card -->
 

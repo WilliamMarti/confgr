@@ -63,7 +63,7 @@ def login():
 
 		except Exception:
 
-			return "Error"
+			return render_template('500.html', title=title, username=session['username']), 500
 
 		if result == None:
 
@@ -132,7 +132,30 @@ def inventory(name=None, title=None):
 
 	title = "Inventory"
 
-	return render_template('inventory.html', name=name, title=title, username=session['username'])
+	try:
+
+		conn = sqlite3.connect('confgrdb.db')
+		c = conn.cursor()
+
+		selectdevicenames = """SELECT * from inventory"""
+
+		devices = []
+
+		c.execute(selectdevicenames)
+		data = c.fetchall()
+
+		for x in data:
+
+			devicename = str(x[1])
+			devices.append(devicename)
+
+		conn.close()
+
+	except Exception:
+
+		devices = "Error"
+
+	return render_template('inventory.html', name=name, title=title, devices=devices)
 
 
 @application.route("/admin")
@@ -154,7 +177,7 @@ def admin(title=None):
 
 	except Exception:
 
-		return "Error"
+		return render_template('500.html', title=title, username=session['username']), 500
 
 	userlist = results
 
@@ -179,7 +202,7 @@ def profile(username, title=None):
 
 	except Exception:
 
-		return "Error"
+		return render_template('500.html', title=title, username=session['username']), 500
 
 	firstname = result[0]
 	lastname = result[1]
@@ -209,7 +232,7 @@ def profileedit(username, title=None):
 
 	except Exception:
 
-		return "Error"
+		return render_template('500.html', title=title, username=session['username']), 500
 
 	firstname = result[0]
 	lastname = result[1]
@@ -238,7 +261,7 @@ def createuser(title=None):
 
 	except Exception:
 
-		return "Error"
+		return render_template('500.html', title=title, username=session['username']), 500
 
 
 	return render_template('createuser.html', title=title, username=session['username'])
@@ -275,7 +298,7 @@ def createuser_post(title=None):
 
 	except Exception:
 
-		return "Error", 500
+		return render_template('500.html', title=title, username=session['username']), 500
 
 
 	return "Created", 201
@@ -301,7 +324,7 @@ def deleteuser_post(title=None):
 
 	except Exception:
 
-		return "Error", 500
+		return render_template('500.html', title=title, username=session['username']), 500
 
 
 	return "Deleted", 200
@@ -328,9 +351,9 @@ def profileedit_post():
 
 	except Exception:
 
-		return "Error"
+		return render_template('500.html', title=title, username=session['username']), 500
 
-	return first
+	return "Updated", 200
 
 
 
@@ -414,7 +437,13 @@ def server_error(e, title=None):
 
 	return render_template('500.html', title=title, username=session['username']), 500
 
+@application.errorhandler(Exception)
+@login_required
+def unhandled_exception(e, title=None):
 
+	title = "500"
+
+	return render_template('500.html', title=title, username=session['username']), 500
 
 if __name__ == "__main__":
 	application.run(host='0.0.0.0')
