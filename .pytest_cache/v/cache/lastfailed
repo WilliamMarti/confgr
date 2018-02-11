@@ -1,0 +1,9 @@
+{
+  "confgr/test_confgr.py::BasicTests::test_admin_page": true, 
+  "confgr/test_confgr.py::BasicTests::test_bad_page": true, 
+  "confgr/test_confgr.py::BasicTests::test_create_delete_user": true, 
+  "confgr/test_confgr.py::BasicTests::test_invalid_user_login": true, 
+  "confgr/test_confgr.py::BasicTests::test_profile_edit": true, 
+  "confgr/test_confgr.py::BasicTests::test_profile_page": true, 
+  "confgr/test_confgr.py::BasicTests::test_valid_user_login": true
+}
