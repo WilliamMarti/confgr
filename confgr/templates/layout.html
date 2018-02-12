@@ -13,13 +13,17 @@
     -->
     <link rel="stylesheet" href="/static/style.css" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <!--
+    
     <script src="/static/tether/dist/js/tether.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 
+       <!--
     <script src="/static/bootstrap/js/bootstrap.js" crossorigin="anonymous"></script>
     -->
     <script src="/static/button-controllers.js" crossorigin="anonymous"></script>
@@ -32,7 +36,6 @@
 
     <a class="navbar-brand custom-nav-link" href="/">Confgr</a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
       {% if username is defined %}
 
@@ -46,27 +49,21 @@
 
 
         </ul>
-      
 
-        <ul class="nav navbar-nav navbar-right">
 
-          <li class="nav-item dropdown custom-nav-link">
-            <a class="nav-link dropdown-toggle custom-nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             {{ username }}
-             <img src="/static/icons/user-icon.png">
-            </a>
+        <div class="dropdown">
+          <a class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ username }} <img src="/static/icons/user-icon.png">
+          </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="/profile/{{ username }}">Profile</a>
               <a class="dropdown-item" href="/admin">Admin</a>
               <a class="dropdown-item" href="/logout">Logout</a>
             </div>
-          </li>
+        </div>
 
-        </ul>
+    {% endif %}
 
-      {% endif %}
-
-    </div>
 
   </nav>
 

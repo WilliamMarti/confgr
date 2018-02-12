@@ -60,6 +60,8 @@ $(document).on('click','#loginbutton',function(){
 
 			if(data == "True"){
 
+				console.log("test");
+
 				window.location.replace("/");
 
 			}

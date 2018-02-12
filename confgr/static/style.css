@@ -1,3 +1,16 @@
+#dropdownMenuButton{
+
+	background-color: #34495e;
+	color:#fff;
+
+}
+
+.dropdownMenuButton:hover{
+
+	color:#a0a0a0;
+
+}
+
 #customnavbar{
 
 	background-color: #34495e;

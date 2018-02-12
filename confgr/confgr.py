@@ -96,7 +96,6 @@ def home(title=None, devices=None):
 
 	title = "Home"
 
-
 	try:
 
 		conn = sqlite3.connect('confgrdb.db')
@@ -155,7 +154,7 @@ def inventory(name=None, title=None):
 
 		devices = "Error"
 
-	return render_template('inventory.html', name=name, title=title, devices=devices)
+	return render_template('inventory.html', title=title, username=session['username'], devices=devices)
 
 
 @application.route("/admin")
