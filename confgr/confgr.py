@@ -101,9 +101,10 @@ def home(title=None, devices=None):
 		conn = sqlite3.connect('confgrdb.db')
 		c = conn.cursor()
 
-		selectdevicenames = """SELECT devicename from inventory"""
+		selectdevicenames = """SELECT devicename, id from inventory"""
 
 		devices = []
+		devicesid = []
 
 		c.execute(selectdevicenames)
 		data = c.fetchall()
@@ -113,6 +114,8 @@ def home(title=None, devices=None):
 			devicename = str(x[0])
 			devices.append(devicename)
 
+			devicesid.append(x[1])
+
 		conn.close()
 
 	except Exception:
@@ -120,7 +123,7 @@ def home(title=None, devices=None):
 		devices = "Error"
 
 
-	return render_template('home.html', title=title, devices=devices, username=session['username'])
+	return render_template('home.html', title=title, devices=devices, devicesid=devicesid, username=session['username'])
 
 
 @application.route("/inventory")

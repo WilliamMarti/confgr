@@ -132,13 +132,15 @@ $(document).on('click','.devicecheckbox',function(){
 	}
 	else {
 
-		$("#selected" + clicked).remove();
+		console.log("#selected" + clicked);
+
+		$('#selected' + clicked).remove();
 		selected.pop(clicked);
 
 	}
 
 
-
+	console.log(selected);
 });
 
 
