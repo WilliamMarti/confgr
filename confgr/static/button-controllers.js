@@ -117,6 +117,8 @@ $(document).on('click','.devicecheckbox',function(){
 	var clicked = $(this).attr('id');
 
 
+
+
 	if ($(this).is(':checked') == true){
 
 		var newrow = "<div id='selected" + clicked + "' class='row'>\
@@ -134,7 +136,7 @@ $(document).on('click','.devicecheckbox',function(){
 
 		console.log("#selected" + clicked);
 
-		$('#selected' + clicked).remove();
+		$('[id="selected' + clicked + '"]').remove();
 		selected.pop(clicked);
 
 	}
