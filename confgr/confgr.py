@@ -23,7 +23,7 @@ def login_required(f):
 
 			return f(*args, **kwargs)
 
-		except KeyError, e:
+		except KeyError:
 
 			return redirect("/login", code=302)
 
@@ -47,9 +47,12 @@ def login():
 		username = request.form['username']
 		password = request.form['password']
 
-		password = bcrypt.hashpw(password.encode('utf8'), salt)
 
-		session['username'] = request.form['username']
+		password = bcrypt.hashpw(password.encode('utf8'), salt.encode('utf8')).decode('utf8')
+
+		print (password)
+
+		session['username'] = username
 
 		try:
 
