@@ -1,0 +1,116 @@
+<html>
+
+  <header>
+
+    <title> {{ title }} </title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/tether/dist/css/tether.css" crossorigin="anonymous">
+    -->
+    <link rel="stylesheet" href="/static/style.css" crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    
+    <script src="/static/tether/dist/js/tether.js" crossorigin="anonymous"></script>
+ 
+       <!--
+    <script src="/static/bootstrap/js/bootstrap.js" crossorigin="anonymous"></script>
+    -->
+    <script src="/static/button-controllers.js" crossorigin="anonymous"></script>
+    
+
+  </header>
+
+<!--
+  <nav id="customnavbar" class="navbar navbar-toggleable-md">
+
+
+    <a class="navbar-brand custom-nav-link" href="/">Confgr</a>
+
+
+      {% if context is defined %}
+
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item active">
+
+            <a class="nav-link" href="/inventory">Inventory</a>
+
+          </li>
+
+
+        </ul>
+
+
+        <div class="dropdown">
+          <a class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ username }} <img src="/static/icons/user-icon.png">
+          </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="/profile/{{ username }}">Profile</a>
+              <a class="dropdown-item" href="/admin">Admin</a>
+              <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
+        </div>
+
+    {% endif %}
+
+
+
+  </nav>
+
+-->
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Inventory</a>
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto p-2">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ username }}
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" href="#">Admin</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Logout</a>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+
+
+  </nav>
+
+
+  {% block body %}{% endblock %}
+
+
+</html>
