@@ -7,7 +7,10 @@ from django.http import HttpResponse
 def index(request):
 
 	username = 'wmarti'
+	page = "Home"
+	title = "Confgr - " + page
 
-	context = {'username': username}
+	context = {'username': username,
+				'title': title}
 
 	return render(request, 'core/home.html', context)
