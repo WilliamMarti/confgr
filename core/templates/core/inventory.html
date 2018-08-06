@@ -1,0 +1,69 @@
+{% extends "core/layout.html" %}
+
+{% block body %}
+
+	<body>
+		
+		<div class="container">
+
+		  <div class="row">
+
+		    <div class="col-md-12">
+
+		    	<div class="card">
+
+					<div class="card-header card-style">
+
+						Network Devices:
+
+					</div>
+
+
+
+					<ul class="list-group list-group-flush">
+
+					{% for device in devices %}
+
+						<li class="list-group-item">
+
+
+							<div class="row">
+
+								<div class="col-md-3">
+
+									{{ device.name }}
+
+								</div>
+
+								<div class="col-md-3">
+
+									{{ device.model }}
+
+								</div>
+
+								<div class="col-md-3">
+
+									{{ device.site }}
+
+								</div>
+
+							</div>
+
+						</li>
+
+
+					{% endfor %}
+
+					</ul>
+
+				</div> <!-- Card -->
+
+		    </div> <!-- column -->
+
+		  </div> <!-- row -->
+
+		</div> <!-- container -->
+
+	</body>
+
+{% endblock %}

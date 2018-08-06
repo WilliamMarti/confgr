@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+	<body>
+		
+		<div class="container">
+
+		  <div class="row">
+
+		    <div class="col-md-6">
+
+		    	<div class="card">
+
+				  <div class="card-header card-style">
+				    Link to Netbox API:
+				  </div>
+
+				  <div class="card-body">
+
+					<div class="form-group">
+					  <label for="netboxurl">Netbox URL:</label>
+					  <input type="text" class="form-control" id="netboxurl">
+					</div>
+					<div class="form-group">
+					  <label for="netboxapikey">API Key:</label>
+					  <input type="text" class="form-control" id="netboxapikey">
+					</div>
+
+					<button id="netboxlinkbutton" class="btn btn-primary">Connect</button>
+
+
+				  </div>
+
+				</div> <!-- Card -->
+
+		    </div> <!-- column -->
+
+		    <div class="col-md-6">
+
+		    	<div class="card">
+
+				  <div class="card-header card-style">
+				    Netbox Connection Status:
+				  </div>
+
+				  <div class="card-body">
+
+
+				  	<div id="netboxconnectionstatus">
+
+				  		Disconnected
+
+				  	</div>
+
+				  	<div id="inventorydownload">
+
+				  		
+
+				  	</div>
+
+
+				  </div>
+
+				</div> <!-- Card -->
+
+
+		    </div> <!-- column -->
+
+		  </div> <!-- row -->
+
+
+		  <div class="row">
+
+		  	<div class="col-md-6">
+
+		    	<div class="card">
+
+				  <div class="card-header card-style">
+				    Manage Users:
+				  </div>
+
+				  <div class="card-body">
+
+
+				  	<div class="row">
+
+				  		<div class="col-md-4">
+
+				  		{% for user in userlist %}
+
+					  		<div class="row">
+
+					  			<div class="col-md-12">
+
+					  				<a href="/profile/{{ user[2] }}">{{ user[2] }}</a>
+
+					  			</div>
+
+					  		</div>
+
+					  	{% endfor %}
+
+					  	</div>
+
+				  		<div class="col-md-3 offset-md-5">
+
+							<a class="btn btn-primary btn-sm" href="/createuser" role="button">Create User</a>
+
+				  		</div>
+
+
+				  	</div>
+
+				  </div>
+
+				</div> <!-- Card -->
+
+		  	</div>
+
+		  </div>
+
+		</div> <!-- container -->
+
+	</body>
+
+{% endblock %}
