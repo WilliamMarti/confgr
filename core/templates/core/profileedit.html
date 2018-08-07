@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "core/layout.html" %}
 
 {% block body %}
 
@@ -13,7 +13,7 @@
 				<ol class="breadcrumb">
 				  <li class="breadcrumb-item"><a href="/">Home</a></li>
 				  <li class="breadcrumb-item"><a href="/admin">Admin</a></li>
-				  <li class="breadcrumb-item"><a href="/profile/{{ username }}">{{ username }}</a></li>
+				  <li class="breadcrumb-item"><a href="/user/{{ username }}">{{ username }}</a></li>
 				  <li class="breadcrumb-item active">Edit</li>
 				</ol>
 
@@ -61,7 +61,7 @@
 							  </div>
 
 
-							  <a class="btn btn-secondary" href="/profile/{{ username }}" role="button">Cancel</a>
+							  <a class="btn btn-secondary" href="/user/{{ username }}" role="button">Cancel</a>
 							  <button type="profilesubmit" id="profilesubmit" class="btn btn-primary">Submit</button>
 
 							</form>

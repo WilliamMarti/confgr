@@ -8,9 +8,9 @@
 
 		  <div class="row">
 
-		    <div class="col-md-12">
+			<div class="col-md-12">
 
-		    	<div class="card">
+				<div class="card">
 
 					<div class="card-header card-style">
 
@@ -18,47 +18,40 @@
 
 					</div>
 
+					<table class="table">
+
+						<thead>
+
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Name</th>
+								<th scope="col">Model</th>
+								<th scope="col">Site</th>
+							</tr>
+
+						</thead>
+
+						<tbody>
+
+						{% for device in devices %}
 
 
-					<ul class="list-group list-group-flush">
+							<tr>
+								<th scope="row">{{ device.id }}</th>
+								<td>{{ device.name }}</td>
+								<td>{{ device.model }}</td>
+								<td>{{ device.site }}</td>
+							</tr>
 
-					{% for device in devices %}
+						{% endfor %}
 
-						<li class="list-group-item">
+						</tbody>
 
-
-							<div class="row">
-
-								<div class="col-md-3">
-
-									{{ device.name }}
-
-								</div>
-
-								<div class="col-md-3">
-
-									{{ device.model }}
-
-								</div>
-
-								<div class="col-md-3">
-
-									{{ device.site }}
-
-								</div>
-
-							</div>
-
-						</li>
-
-
-					{% endfor %}
-
-					</ul>
+					</table>
 
 				</div> <!-- Card -->
 
-		    </div> <!-- column -->
+			</div> <!-- column -->
 
 		  </div> <!-- row -->
 
