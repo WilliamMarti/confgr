@@ -19,12 +19,16 @@ class Device(models.Model):
 
 class User(models.Model):
 
+	# bsmith
 	username = models.CharField(max_length=30)
 
+	# Bob
 	firstname = models.CharField(max_length=30)
 
+	# Smith
 	lastname = models.CharField(max_length=30)
 
+	# bob.smith@gmail.com
 	email = models.CharField(max_length=30)
 
 	def __str__(self):
